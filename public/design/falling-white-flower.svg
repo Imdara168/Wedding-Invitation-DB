@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <defs>
+    <radialGradient id="petal" cx="48%" cy="58%" r="70%">
+      <stop stop-color="#e5e9d4"/>
+      <stop offset=".43" stop-color="#fffef8"/>
+      <stop offset="1" stop-color="#edf1e8"/>
+    </radialGradient>
+    <radialGradient id="center">
+      <stop stop-color="#f8e4a0"/>
+      <stop offset=".7" stop-color="#ddc474"/>
+      <stop offset="1" stop-color="#a99b62"/>
+    </radialGradient>
+  </defs>
+  <g fill="url(#petal)" stroke="#cbd4bc" stroke-width=".9">
+    <path d="M40 40C30 29 31 9 40 7c10 1 12 20 0 33z"/>
+    <path d="M40 40C43 24 60 14 66 19c7 7-4 24-26 21z"/>
+    <path d="M40 40c15-8 33 2 32 11-1 10-20 13-32-11z"/>
+    <path d="M40 40c14 10 13 30 5 34-10 3-21-12-5-34z"/>
+    <path d="M40 40c-4 16-23 25-30 19-7-8 3-24 30-19z"/>
+    <path d="M40 40C24 46 7 34 10 26c4-9 22-9 30 14z"/>
+  </g>
+  <g fill="none" stroke="#d3dcc9" stroke-width=".9" opacity=".8">
+    <path d="M40 34V13M46 35l16-12M47 44l20 7M42 47l3 22M33 44 15 56M32 38 15 28"/>
+  </g>
+  <circle cx="40" cy="40" r="9" fill="url(#center)" stroke="#b7ad79" stroke-width="1"/>
+  <circle cx="40" cy="40" r="3.7" fill="#f5e7ad"/>
+  <g fill="#f7efc7">
+    <circle cx="38" cy="34" r=".9"/><circle cx="44" cy="36" r=".9"/>
+    <circle cx="46" cy="41" r=".9"/><circle cx="42" cy="45" r=".9"/>
+    <circle cx="36" cy="44" r=".9"/><circle cx="34" cy="39" r=".9"/>
+  </g>
+</svg>

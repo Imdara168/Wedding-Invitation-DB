@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#657b55" />
+    <meta
+      name="description"
+      content="Wedding invitation for Dara and Buta, Sunday, November 22, 2026."
+    />
+    <title>Dara &amp; Buta — Wedding Invitation</title>
+    <script>document.documentElement.classList.add('js')</script>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/invitation.js" defer></script>
+  </head>
+  <body>
+    <div class="gate" aria-label="Open the wedding invitation">
+      <div class="gate__card">
+        <img class="gate__art" src="/design/envelope-cover.png" alt="" width="941" height="1672" />
+        <div class="gate__letter" aria-hidden="true">
+          <img src="/design/1.png" alt="" width="1240" height="1748" />
+        </div>
+        <div class="gate__envelope-face" aria-hidden="true"></div>
+        <div class="gate__flap-motion" aria-hidden="true">
+          <div class="gate__flap"></div>
+          <div class="gate__flap-back"></div>
+          <span class="gate__wax">
+            <span class="gate__seal"><span>D</span><span>&amp;</span><span>B</span></span>
+          </span>
+        </div>
+        <div class="gate__monogram" aria-hidden="true"><span>D</span><span>B</span></div>
+        <h1 class="gate__names">Dara <span>&amp;</span> Buta</h1>
+        <button class="gate__envelope" id="open-envelope" type="button" aria-label="Open Dara and Buta's wedding invitation"></button>
+        <p class="gate__prompt">Tap the envelope to open</p>
+      </div>
+    </div>
+
+    <div class="leaf-scene" aria-hidden="true">
+      <div class="leaf-rail leaf-rail--left"></div>
+      <div class="leaf-rail leaf-rail--right"></div>
+    </div>
+
+    <main class="invitation" aria-label="Dara and Buta wedding invitation" tabindex="-1">
+      <img
+        src="/design/1.png"
+        alt="Dara and Buta's wedding invitation cover, with their portrait, floral frame, and November 22 celebration details."
+        width="1240"
+        height="1748"
+        fetchpriority="high"
+      />
+      <img
+        src="/design/2.png"
+        alt="Invitation from both families with the couple's names and wedding reception details in Khmer and English."
+        width="1240"
+        height="1748"
+        loading="lazy"
+      />
+      <img
+        src="/design/3.png"
+        alt="Wedding celebration schedule in Khmer, decorated with green watercolor foliage."
+        width="1240"
+        height="1748"
+        loading="lazy"
+      />
+      <img
+        src="/design/4.png"
+        alt="Contact phone numbers and QR codes for the wedding invitation."
+        width="1240"
+        height="1748"
+        loading="lazy"
+      />
+    </main>
+
+    <audio id="wedding-music" src="/audio/wedding-song.mp3" preload="auto"></audio>
+    <button class="music-toggle" id="music-toggle" type="button" aria-label="Turn music on" aria-pressed="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 9v6h4l5 4V5L8 9H4Z" />
+        <path class="music-toggle__waves" d="M16 9a4 4 0 0 1 0 6M18.5 6a8 8 0 0 1 0 12" />
+        <path class="music-toggle__slash" d="M17 9l5 6M22 9l-5 6" />
+      </svg>
+      <span class="music-toggle__label">Off</span>
+    </button>
+  </body>
+</html>
