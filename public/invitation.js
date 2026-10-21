@@ -1,4 +1,14 @@
 const root = document.documentElement;
+const gate = document.querySelector('.gate');
+const guestRegister = document.getElementById('guest-register');
+const guestRegisterForm = document.getElementById('guest-register-form');
+const guestNameInput = document.getElementById('guest-name');
+const guestSexSelect = document.getElementById('guest-sex');
+const guestDetails = document.getElementById('guest-details');
+const guestDisplayName = document.getElementById('guest-display-name');
+const contactQrButton = document.getElementById('contact-qr-button');
+const contactDialog = document.getElementById('contact-dialog');
+const contactDialogClose = document.getElementById('contact-dialog-close');
 const openButton = document.getElementById('open-envelope');
 const invitation = document.querySelector('.invitation');
 const card = document.querySelector('.gate__card');
@@ -7,11 +17,62 @@ const firstPage = invitation.querySelector('img');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const music = document.getElementById('wedding-music');
 const musicToggle = document.getElementById('music-toggle');
+let fullGuestName = '';
 
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+gate.inert = true;
+guestNameInput.focus({ preventScroll: true });
+
+guestNameInput.addEventListener('input', () => guestNameInput.setCustomValidity(''));
+
+guestRegisterForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const guestName = guestNameInput.value.trim();
+
+  if (!guestName) {
+    guestNameInput.setCustomValidity('សូមបំពេញឈ្មោះជាភាសាខ្មែរ');
+    guestNameInput.reportValidity();
+    return;
+  }
+
+  const sex = guestSexSelect.value;
+  const title = sex === 'Female' ? 'លោកស្រី' : sex === 'Male' ? 'លោក' : '';
+  fullGuestName = title ? `${title} ${guestName}` : guestName;
+  guestDisplayName.setAttribute('aria-label', fullGuestName);
+  guestDisplayName.textContent = '';
+  guestDetails.hidden = false;
+  guestRegister.hidden = true;
+  gate.inert = false;
+  root.classList.add('registered');
+  openButton.focus({ preventScroll: true });
+});
+
+contactQrButton.addEventListener('click', () => contactDialog.showModal());
+contactDialogClose.addEventListener('click', () => contactDialog.close());
+contactDialog.addEventListener('click', (event) => {
+  if (event.target === contactDialog) contactDialog.close();
+});
 
 function showFrontPage() {
   window.scrollTo(0, 0);
+}
+
+function typeGuestName() {
+  if (reducedMotion.matches || !('Segmenter' in Intl)) {
+    guestDisplayName.textContent = fullGuestName;
+    return;
+  }
+
+  const letters = Array.from(new Intl.Segmenter('km', { granularity: 'grapheme' }).segment(fullGuestName), ({ segment }) => segment);
+  let index = 0;
+
+  function typeNextLetter() {
+    guestDisplayName.textContent += letters[index];
+    index += 1;
+    if (index < letters.length) window.setTimeout(typeNextLetter, 85);
+  }
+
+  if (letters.length) typeNextLetter();
 }
 
 function syncMusicToggle() {
@@ -74,6 +135,7 @@ async function expandInvitation() {
   }
 
   root.classList.add('opened');
+  typeGuestName();
   root.classList.remove('expanding');
   preview.remove();
   showFrontPage();
@@ -81,7 +143,7 @@ async function expandInvitation() {
 }
 
 openButton.addEventListener('click', () => {
-  if (root.classList.contains('opening') || root.classList.contains('opened')) return;
+  if (!root.classList.contains('registered') || root.classList.contains('opening') || root.classList.contains('opened')) return;
 
   showFrontPage();
   root.classList.add('opening');
@@ -90,6 +152,7 @@ openButton.addEventListener('click', () => {
   if (reducedMotion.matches) {
     root.classList.add('pulling');
     root.classList.add('opened');
+    typeGuestName();
     showFrontPage();
     invitation.focus({ preventScroll: true });
     return;

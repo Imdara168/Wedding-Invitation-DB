@@ -14,6 +14,23 @@
     <script src="/invitation.js" defer></script>
   </head>
   <body>
+    <div class="guest-register" id="guest-register" role="dialog" aria-modal="true" aria-labelledby="guest-register-title">
+      <form class="guest-register__card" id="guest-register-form">
+        <span class="guest-register__ornament" aria-hidden="true">✦</span>
+        <h2 id="guest-register-title">Welcome, dear guest</h2>
+        <p lang="km">សូមបំពេញព័ត៌មានរបស់អ្នក ដើម្បីបើកមើលលិខិតអញ្ជើញ។</p>
+        <label for="guest-name" lang="km">សូមបំពេញឈ្មោះជាភាសាខ្មែរ</label>
+        <input id="guest-name" name="name" type="text" autocomplete="name" maxlength="40" required />
+        <label for="guest-sex" lang="km">សូមជ្រើសរើសភេទរបស់អ្នក</label>
+        <select id="guest-sex" name="sex" required>
+          <option value="" selected disabled lang="km">ជ្រើសរើសភេទ</option>
+          <option value="Female" lang="km">ស្រី</option>
+          <option value="Male" lang="km">ប្រុស</option>
+        </select>
+        <button type="submit" lang="km">បន្តទៅលិខិតអញ្ជើញ</button>
+      </form>
+    </div>
+
     <div class="gate" aria-label="Open the wedding invitation">
       <div class="gate__card">
         <img class="gate__art" src="/design/envelope-cover.png" alt="" width="941" height="1672" />
@@ -31,7 +48,7 @@
         <div class="gate__monogram" aria-hidden="true"><span>D</span><span>B</span></div>
         <h1 class="gate__names">Dara <span>&amp;</span> Buta</h1>
         <button class="gate__envelope" id="open-envelope" type="button" aria-label="Open Dara and Buta's wedding invitation"></button>
-        <p class="gate__prompt">Tap the envelope to open</p>
+        <p class="gate__prompt" lang="km">ចុចលើស្រោមសំបុត្រដើម្បីបើក</p>
       </div>
     </div>
 
@@ -41,13 +58,18 @@
     </div>
 
     <main class="invitation" aria-label="Dara and Buta wedding invitation" tabindex="-1">
-      <img
-        src="/design/1.png"
-        alt="Dara and Buta's wedding invitation cover, with their portrait, floral frame, and November 22 celebration details."
-        width="1240"
-        height="1748"
-        fetchpriority="high"
-      />
+      <div class="invitation__first-page">
+        <img
+          src="/design/1.png"
+          alt="Dara and Buta's wedding invitation cover, with their portrait, floral frame, and November 22 celebration details."
+          width="1240"
+          height="1748"
+          fetchpriority="high"
+        />
+        <div class="guest-details" id="guest-details" hidden>
+          <span class="guest-details__name" id="guest-display-name"></span>
+        </div>
+      </div>
       <img
         src="/design/2.png"
         alt="Invitation from both families with the couple's names and wedding reception details in Khmer and English."
@@ -62,14 +84,51 @@
         height="1748"
         loading="lazy"
       />
-      <img
-        src="/design/4.png"
-        alt="Contact phone numbers and QR codes for the wedding invitation."
-        width="1240"
-        height="1748"
-        loading="lazy"
-      />
+      <div class="invitation__last-page">
+        <img
+          src="/design/4.png"
+          alt="Contact phone numbers and QR codes for the wedding invitation."
+          width="1240"
+          height="1748"
+          loading="lazy"
+        />
+        <button
+          class="contact-qr-button"
+          id="contact-qr-button"
+          type="button"
+          aria-label="សូមចុចលើទីនេះ ដើម្បីជ្រើសរើសតេឡេក្រាមរបស់ម្ចាស់មង្គលការ។"
+        >
+          <svg class="contact-qr-button__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M21.4 3.6a1 1 0 0 0-1.1-.2L2.4 10.2a1 1 0 0 0 .1 1.9l4.6 1.4 1.8 5.5a1 1 0 0 0 1.7.3l2.7-2.8 4.6 3.4a1 1 0 0 0 1.6-.6l2.2-14.7a1 1 0 0 0-.3-1ZM9.3 13l8.2-6.3-6.6 7.7-.5 2.1L9.3 13Z" />
+          </svg>
+          <span class="contact-qr-button__text" lang="km">សូមចុចលើទីនេះ ដើម្បីជ្រើសរើសតេឡេក្រាមរបស់ម្ចាស់មង្គលការ។</span>
+        </button>
+        <a
+          class="location-qr-link"
+          href="https://www.google.com/maps/search/?api=1&amp;query=Building%20F%2C%20Koh%20Pich%2C%20Phnom%20Penh"
+          aria-label="Open the wedding location in Google Maps from the QR code"
+        >
+          <svg class="location-qr-link__pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
+            <circle cx="12" cy="10" r="2.5" />
+          </svg>
+          <span class="location-qr-link__text" lang="km">សូមចុចលើតំណភ្ជាប់នេះ ដើម្បីងាយស្រួលមើលទីតាំង។</span>
+        </a>
+      </div>
     </main>
+
+    <dialog class="contact-dialog" id="contact-dialog" aria-labelledby="contact-dialog-title">
+      <div class="contact-dialog__card">
+        <button class="contact-dialog__close" id="contact-dialog-close" type="button" aria-label="បិទ">×</button>
+        <span class="guest-register__ornament" aria-hidden="true">✦</span>
+        <h2 id="contact-dialog-title" lang="km">តេឡេក្រាមរបស់ម្ចាស់មង្គលការ</h2>
+        <div class="contact-dialog__choices" lang="km">
+          <a href="https://t.me/URA599" target="_blank" rel="noopener noreferrer"><span>ឪពុកកូនក្រមុំ</span><small>@URA599</small></a>
+          <a href="https://t.me/+85592234519" target="_blank" rel="noopener noreferrer"><span>ម្ដាយកូនក្រមុំ</span><small>+855 92 234 519</small></a>
+          <a href="https://t.me/+85512311543" target="_blank" rel="noopener noreferrer"><span>ម្ដាយកូនកំលោះ</span><small>+855 12 311 543</small></a>
+        </div>
+      </div>
+    </dialog>
 
     <audio id="wedding-music" src="/audio/wedding-song.mp3" preload="auto"></audio>
     <button class="music-toggle" id="music-toggle" type="button" aria-label="Turn music on" aria-pressed="false">
